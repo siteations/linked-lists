@@ -94,32 +94,38 @@ ListNode.prototype.splitAt = function(idNum){
 //
 
 ListNode.prototype.find = function(idNum){
-    var run=this;
 
-    if (runner.id === idNum){
+    if (this.id === idNum){
         //runner.next = runner.next.next; this is the mutible version.... must be a copy
         console.log(runner.value);
-        return new ListNode (runner.value, runner.next);
+        return this;
 
-    } else if (runner.next === null){
-        //runner.next = runner.next.next; this is the mutible version.... must be a copy
-        return null;
-
-    }
-    else {
-        return runner.next.find(idNum);
+    } else {
+        if (this.next===null){
+            return null;
+        }
+        else {
+            return this.next.find(idNum);
+        }
     }
 }
 
-
-//ListNode.prototype.check=function(){
-//     (this.length>1)? this.next = next : this.next = null;
-// }
-/* want to use ES6? Try writing this as a class:
-class ListNode {
-  constructor (value, next) {}
+ListNode.prototype.insertAt(id,list){
+    if (this.id ===id){
+        return list.append(list);
+    } else {
+        return new ListNode(this.value, this.next? this.next.insertAt(id,list): null);
+    }
 }
-*/
+
+ListNode.prototype.intersect(list){
+    cont found = list.find(this.id);
+
+    if (found) return found;
+    else return this.next ? this.next.intersection(list) : return null;
+}
+
+
 
 
 module.exports = { ListNode };
