@@ -97,7 +97,7 @@ ListNode.prototype.find = function(idNum){
 
     if (this.id === idNum){
         //runner.next = runner.next.next; this is the mutible version.... must be a copy
-        console.log(runner.value);
+        //console.log('find=>',this.value);
         return this;
 
     } else {
@@ -110,19 +110,19 @@ ListNode.prototype.find = function(idNum){
     }
 }
 
-ListNode.prototype.insertAt(id,list){
+ListNode.prototype.insertAt = function(id,list){
     if (this.id ===id){
-        return list.append(list);
+        return this.append(list);
     } else {
         return new ListNode(this.value, this.next? this.next.insertAt(id,list): null);
     }
 }
 
-ListNode.prototype.intersect(list){
-    cont found = list.find(this.id);
+ListNode.prototype.intersection = function(list){
+    const found = list.find(this.id);
 
     if (found) return found;
-    else return this.next ? this.next.intersection(list) : return null;
+    else return (this.next!=null) ? this.next.intersection(list) : null;
 }
 
 
